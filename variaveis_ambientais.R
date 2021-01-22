@@ -105,14 +105,11 @@ write.csv(dados_env,"env_date.csv", row.names = FALSE)
 
 
 
-
-sp1 <- rgdal::readOGR(dsn ="C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp",
-                  layer = "RiverATLAS_v10_sa_south.shp")
-sp2 <- rgdal::readOGR(dsn="C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp",
-                        layer ="BasinATLAS_v10_lev12.shp")
+library(rgdal)
+sp1 <- readOGR("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp/RiverATLAS_v10_sa_south.shp")
+sp2 <- readOGR("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp/BasinATLAS_v10_lev12.shp")
 
 #Carrega aruivo SHP - package shapefile
 #sp1 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp/RiverATLAS_v10_sa_south.shp")
 #sp2 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp/BasinATLAS_v10_lev12.shp")
 
-library(maptools)

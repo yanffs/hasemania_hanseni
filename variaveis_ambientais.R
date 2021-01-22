@@ -3,9 +3,9 @@
 #************************************************#
 
 #### instala e carrega pacotes ####
-install.packages(c("shapefiles",
-                   "raster",
-                   "maps"), type = "source")
+#install.packages(c("shapefiles",
+#                   "raster",
+#                   "maps"), type = "source")
 
 #Carrega bibliotecas
 library(shapefiles) #para carregar arquivos .shp
@@ -97,9 +97,22 @@ values_slope <- extract(area_slope,pontos)#extraindo dados para as coordenadas
 
 valores_slope <- cbind.data.frame(coordinates(pontos),values_slope)#convertendo, como tabela
 
+#Prepara data frame
 dados_env <- cbind.data.frame(valores_wc, values_slope, values_srtm)
+dados_env<- cbind.data.frame(d$catalogNumber, d$higherGeographyID, dados_env)
+#exporta data frame
+write.csv(dados_env,"env_date.csv", row.names = FALSE)
+
+
+
+
+sp1 <- rgdal::readOGR(dsn ="C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp",
+                  layer = "RiverATLAS_v10_sa_south.shp")
+sp2 <- rgdal::readOGR(dsn="C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp",
+                        layer ="BasinATLAS_v10_lev12.shp")
 
 #Carrega aruivo SHP - package shapefile
-sp1 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp/RiverATLAS_v10_sa_south.shp")
-sp2 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp/BasinATLAS_v10_lev12.shp")
+#sp1 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp/RiverATLAS_v10_sa_south.shp")
+#sp2 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp/BasinATLAS_v10_lev12.shp")
 
+library(maptools)

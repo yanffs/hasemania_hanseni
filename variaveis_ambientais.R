@@ -103,6 +103,8 @@ dados_env<- cbind.data.frame(d$catalogNumber, d$higherGeographyID, dados_env)
 #exporta data frame
 write.csv(dados_env,"env_date.csv", row.names = FALSE)
 
+library(maptools)
+nc_shp <- system.file("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp/RiverATLAS_v10_sa_south.shp")
 
 
 library(rgdal)
@@ -113,3 +115,31 @@ sp2 <- readOGR("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v
 #sp1 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp/RiverATLAS_v10_sa_south.shp")
 #sp2 <- read.shp("C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp/BasinATLAS_v10_lev12.shp")
 
+
+#testing package sf
+require(rgdal)
+require(sf)
+
+dsn <- "C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/RiverATLAS_v10_shp"
+lay <- "RiverATLAS_v10_sa_south"
+
+system.time(test <- read_sf(dsn = dsn, layer = lay))
+
+test #riverATLAS_v10
+?read_sf
+dsn <- "C:/Users/Yan Felipe/Desktop/Dados_esp_amb/Hydroshed/BasinATLAS_v10_shp"
+lay <- "BasinATLAS_v10_lev12"
+
+system.time(test2 <- read_sf(dsn = dsn, layer = lay))
+class(test)
+
+
+#daqui pra baixo nao da
+
+prec_dfs <- exact_extract(test, pontos, include_xy=TRUE)
+
+install.packages("exactextractr", type = "source")
+library(exactextractr)
+
+prec_dfs <- exact_extract(test, pontos, include_xy=TRUE)
+testvalues_rb <- extract(test,pontos)#extraindo dados para as coordenadas
